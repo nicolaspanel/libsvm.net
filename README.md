@@ -33,6 +33,6 @@ for (int i = 0 ; i < test.l ; i++)
 }
 }}}
 
-See [http://code.google.com/p/libsvm-net/source/browse/#git%2FLIBSVM source code] for more informations about how it use the [http://www.csie.ntu.edu.tw/~cjlin/libsvm/ libsvm] java library (translated into a .NET dll with [http://www.ikvm.net/ IKVM]) and feel free to send me your feedback.
+See [https://github.com/nicolaspanel/libsvm.net/tree/master/LIBSVM](source code) for more informations about how it use the [http://www.csie.ntu.edu.tw/~cjlin/libsvm/](libsvm) java library (translated into a .NET dll with [http://www.ikvm.net/ IKVM]) and feel free to send me your feedback.
 
 Enjoy !
