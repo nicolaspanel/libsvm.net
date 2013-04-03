@@ -26,8 +26,9 @@ for (int i = 0 ; i < test.l ; i++)
 {
     var x = test.x[i];
     var y = test.y[i];
-    var predict = svm.Predict(x); // returns the predicted value 'y'
-    var probabilities = svm.PredictProbabilities(x);  // returns the probabilities for each 'y' value
+    var predictedY = svm.Predict(x); // returns the predicted value for 'x' attributes
+    var probabilities = svm.PredictProbabilities(x);  // returns the probabilities for each class
+    // Note : in about accuracy% of cases, 'predictedY' should be equal to 'y'
 }
 ```
 Look at the code for more informations.
