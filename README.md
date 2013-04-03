@@ -30,6 +30,6 @@ for (int i = 0 ; i < test.l ; i++)
     var probabilities = svm.PredictProbabilities(x);  // returns the probabilities for each 'y' value
 }
 ```
-Look at the code for more informations and feel free to send me your feedback.
+Look at the code for more informations.
 
 Enjoy !
