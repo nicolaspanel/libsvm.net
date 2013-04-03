@@ -14,10 +14,22 @@ PM> Install-Package libsvm.net
 
 Note : For now, C-SVC and epsilon-SVR are supported. nu-SVC and nu-SVR will be available in future versions.
 
-For more informations about how to use it, see : 
-* [C_SVC unit tests](https://github.com/nicolaspanel/libsvm.net/blob/master/LIBSVM.NET.Tests/LIBSVM.NET.Tests/C_SVCTests.cs) (Classification)
-* [epsilon_SVR unit tests](https://github.com/nicolaspanel/libsvm.net/blob/master/LIBSVM.NET.Tests/LIBSVM.NET.Tests/Epsilon_SVRTests.cs) (Regression)
+You can use it this way:
+```c#
+var prob = ProblemHelper.ReadAndScaleProblem(TRAINING_FILE);
+var test = ProblemHelper.ReadAndScaleProblem(TEST_FILE);
 
-Feel free to send me your feedback.
+
+var svm = new C_SVC(prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);
+var accuracy = svm.GetCrossValidationAccuracy(nr_fold);
+for (int i = 0 ; i < test.l ; i++)
+{
+    var x = test.x[i];
+    var y = test.y[i];
+    var predict = svm.Predict(x); // returns the predicted value 'y'
+    var probabilities = svm.PredictProbabilities(x);  // returns the probabilities for each 'y' value
+}
+```
+Look at the code for more informations and feel free to send me your feedback.
 
 Enjoy !
