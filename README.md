@@ -34,3 +34,5 @@ for (int i = 0 ; i < test.l ; i++)
 Look at the code for more informations.
 
 Enjoy !
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/abd9bce9df6164dedaa164cbf971ed21 "githalytics.com")](http://githalytics.com/nicolaspanel/libsvm.net)
