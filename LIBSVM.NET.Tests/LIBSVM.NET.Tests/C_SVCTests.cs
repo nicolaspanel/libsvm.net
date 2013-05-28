@@ -7,63 +7,55 @@ using libsvm;
 
 namespace LIBSVM.NET.Tests
 {
-    /// <summary>
-    ///Classe de test pour SVMTests, destinée à contenir tous
-    ///les tests unitaires SVMTests
-    ///</summary>
     [TestClass()]
     public class C_SVCTests
     {
-        private const string LEU_TEST_FILE = "C:\\Users\\user\\Documents\\visual studio 2010\\Projects\\LIBSVM\\LIBSVM.NET.Tests\\DataSets\\leukemia\\leu.ds.combined";
-        private const string SVMGUIDE1_TEST_FILE = "C:\\Users\\user\\Documents\\visual studio 2010\\Projects\\LIBSVM\\LIBSVM.NET.Tests\\DataSets\\svmguide1\\svmguide1.ds.combined";
-        double C = 0.8;
-        Kernel kernel = KernelHelper.RadialBasisFunctionKernel(0.000030518125);
+        // Full leukemia dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\leukemia folder
+        private const string LEU_TEST_FILE = @"LIBSVM.NET.Tests\DataSets\leukemia\leu.ds.combined";
+        // Full svmguide1 dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\svmguide1 folder
+        //private const string SVMGUIDE1_TEST_FILE = "svmguide1.ds.combined";
+        // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html
+
+        static double C = 0.8;
+        static double gamma = 0.000030518125;
 
         svm_problem _prob; 
 
         [TestInitialize()]
         public void TestInitialize()
         {
-            _prob = ProblemHelper.ReadAndScaleProblem(LEU_TEST_FILE);
+            var path = Environment.CurrentDirectory;
+            var pos = path.IndexOf("libsvm.net");
+            var basePath = path.Substring(0, pos + 10);
+            string fullPath = System.IO.Path.Combine(basePath, LEU_TEST_FILE);
+
+            // get data from file
+            // Note that you should always scale your data
+            _prob = ProblemHelper.ReadAndScaleProblem(fullPath);
         }
 
-        /// <summary>
-        ///Test pour Constructeur SVM
-        ///</summary>
-        [TestMethod()]
-        public void SVMConstructorTest()
-        {
-            var svm = new C_SVC(_prob, kernel, C);
-        }
 
         /// <summary>
-        ///Test pour Constructeur SVM
-        ///</summary>
-        [TestMethod()]
-        public void SVMConstructorTest1()
-        {
-            var svm = new C_SVC(LEU_TEST_FILE, kernel, C);
-        }
-
-        /// <summary>
-        ///Test pour DoCrossValidation
+        /// Show how to get the accuracy using cross validation method
+        /// Assert accurancy is greater than zero
         ///</summary>
         [TestMethod()]
         public void DoCrossValidationTest()
         {
-            var svm = new C_SVC(_prob, kernel, C);
-            var cva = svm.GetCrossValidationAccuracy(5);
+            var svm = new C_SVC(_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);
+            var cva = svm.GetCrossValidationAccuracy(5); 
 
             Assert.IsTrue(cva > 0);
         }
 
         /// <summary>
-        ///Test pour Predict
+        ///Show how to predict probabilities for classification problems
+        ///Verify that the prediction is always the most probable class
         ///</summary>
         [TestMethod()]
         public void PredictTest()
         {
-            var svm = new C_SVC(_prob, kernel, C);
+            var svm = new C_SVC(_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);
             var nb_class = _prob.y.Distinct().Count();
             for (int i = 0; i < _prob.l; i++)
             {
@@ -77,16 +69,6 @@ namespace LIBSVM.NET.Tests
                 var sum = probabilities.Sum(e => e.Value) ;
                 
             }
-        }
-        /// <summary>
-        ///Test pour Predict
-        ///</summary>
-        [TestMethod()]
-        public void DoCrossValidationTest2()
-        {
-            var prob2 = ProblemHelper.ReadAndScaleProblem(SVMGUIDE1_TEST_FILE);
-            var svm = new C_SVC(prob2, KernelHelper.RadialBasisFunctionKernel(3.0), 2.0);
-            var cva = svm.GetCrossValidationAccuracy(5);
         }
     }
 }
