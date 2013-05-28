@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>libsvm.net</id>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <authors>nicolas.panel@live.fr</authors>
     <owners>Nicolas Panel</owners>
-    <licenseUrl>http://code.google.com/p/libsvm-net/wiki/COPYRIGHT</licenseUrl>
-    <projectUrl>http://code.google.com/p/libsvm-net/</projectUrl>
+    <licenseUrl>https://github.com/nicolaspanel/libsvm.net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/nicolaspanel/libsvm.net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>An easy and quick way to use libsvm in your .NET projects. Envoy !</description>
-    <releaseNotes>Supported SVM : C-SVC and epsilon-SVR.</releaseNotes>
-    <copyright>Copyright 2013</copyright>
+    <releaseNotes>Supported SVM : C-SVC and epsilon-SVR</releaseNotes>
+    <copyright>Copyright (C) 2013 Nicolas Panel</copyright>
     <tags>svm libsvm Machinelearning .net ikvm</tags>
   </metadata>
 </package>
