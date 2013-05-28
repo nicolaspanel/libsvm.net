@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>libsvm.net</id>
+    <version>2.0.1</version>
+    <authors>nicolas.panel@live.fr</authors>
+    <owners>Nicolas Panel</owners>
+    <licenseUrl>http://code.google.com/p/libsvm-net/wiki/COPYRIGHT</licenseUrl>
+    <projectUrl>http://code.google.com/p/libsvm-net/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An easy and quick way to use libsvm in your .NET projects. Envoy !</description>
+    <releaseNotes>Supported SVM : C-SVC and epsilon-SVR.</releaseNotes>
+    <copyright>Copyright 2013</copyright>
+    <tags>svm libsvm Machinelearning .net ikvm</tags>
+  </metadata>
+</package>
