@@ -5,14 +5,6 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 
-
-#################
-## Data Sets
-#################
-
-# Ignore data sets folder
-DataSets/
-
 #################
 ## Visual Studio
 #################
@@ -51,8 +43,3 @@ DataSets/
 TestResults/
 *.trx
 *.testsettings
-*.dll
-
-# Ignore NuGet files
-*.nuspec
-Nuget/
