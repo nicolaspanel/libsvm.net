@@ -1,4 +1,3 @@
-
 # libsvm.net
  
 libsvm.net is an easy way to use [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) in your .NET projects.
@@ -39,7 +38,7 @@ For more informations, see also :
  * [IKVM](http://www.ikvm.net/)
  * [Wikipedia article about SVM](https://en.wikipedia.org/wiki/Support_vector_machine)
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/abd9bce9df6164dedaa164cbf971ed21 "githalytics.com")](http://githalytics.com/nicolaspanel/libsvm.net)
-
 ## License
 libsvm is provided under MIT License
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/abd9bce9df6164dedaa164cbf971ed21 "githalytics.com")](http://githalytics.com/nicolaspanel/libsvm.net)
