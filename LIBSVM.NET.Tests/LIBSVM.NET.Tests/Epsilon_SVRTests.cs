@@ -8,9 +8,9 @@ namespace LIBSVM.NET.Tests
     public class Epsilon_SVRTests
     {
         double epsilon = 1.0;
-        private const string TRAINING_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds"; //File containing training samples
-        private const string TEST_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.t"; //File containing test samples
-        private const string FULL_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.combined"; //File containing training and test samples
+        private const string TRAINING_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.txt"; //File containing training samples
+        private const string TEST_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.t.txt"; //File containing test samples
+        private const string FULL_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.combined.txt"; //File containing training and test samples
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/regression.html
         svm_problem training_prob;
         svm_problem test_prob;

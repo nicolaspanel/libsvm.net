@@ -11,9 +11,9 @@ namespace LIBSVM.NET.Tests
     public class C_SVCTests
     {
         // Full leukemia dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\leukemia folder
-        private const string LEU_TEST_FILE = @"LIBSVM.NET.Tests\DataSets\leukemia\leu.ds.combined";
+        private const string LEU_TEST_FILE = @"LIBSVM.NET.Tests\DataSets\leukemia\leu.ds.combined.txt";
         // Full svmguide1 dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\svmguide1 folder
-        //private const string SVMGUIDE1_TEST_FILE = "svmguide1.ds.combined";
+        //private const string SVMGUIDE1_TEST_FILE = "svmguide1.ds.combined.txt";
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html
 
         static double C = 0.8;
