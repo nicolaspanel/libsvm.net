@@ -39,6 +39,6 @@ For more informations, see also :
  * [Wikipedia article about SVM](https://en.wikipedia.org/wiki/Support_vector_machine)
 
 ## License
-libsvm is provided under MIT License
+libsvm.net is provided under MIT License
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/abd9bce9df6164dedaa164cbf971ed21 "githalytics.com")](http://githalytics.com/nicolaspanel/libsvm.net)
