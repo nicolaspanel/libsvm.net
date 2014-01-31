@@ -8,8 +8,8 @@ namespace LIBSVM.NET.Examples
     public class Epsilon_SVR_Examples
     {
         double epsilon = 1.0;
-        private const string TRAINING_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.txt"; //File containing training samples
-        private const string TEST_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.t.txt"; //File containing test samples
+        private const string TRAINING_FILE = @"dataSets\mpg\mpg.ds"; //File containing training samples
+        private const string TEST_FILE = @"dataSets\mpg\mpg.ds.t"; //File containing test samples
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/regression.html
         svm_problem training_prob;
         svm_problem test_prob;

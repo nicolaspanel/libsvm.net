@@ -15,8 +15,8 @@ namespace LIBSVM.NET.Examples
     [TestClass()]
     public class ProblemHelper_Examples
     {
-        private const string TEST_FILE  = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.txt";
-        private const string WRITE_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds-copy.txt";
+        private const string TEST_FILE  = @"dataSets\leukemia\leu.ds";
+        private const string WRITE_FILE = @"dataSets\leukemia\leu.ds-copy";
         private string base_path = "";
         
         [TestInitialize()]

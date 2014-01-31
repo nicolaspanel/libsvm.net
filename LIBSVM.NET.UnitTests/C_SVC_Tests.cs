@@ -9,7 +9,7 @@ namespace LIBSVM.NET.UnitTests
     [TestClass]
     public class C_SVC_Tests
     {
-        private const string XOR_DATASET = @"LIBSVM.NET.Examples\DataSets\xor\xor.ds.txt";
+        private const string XOR_DATASET = @"dataSets\xor\xor.ds";
         private readonly string base_path ="";
         private readonly svm_problem xor_problem;
         public C_SVC_Tests()
