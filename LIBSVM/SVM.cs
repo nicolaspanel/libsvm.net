@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace libsvm
 {
@@ -11,18 +14,18 @@ namespace libsvm
         protected svm_problem prob;
         protected svm_parameter param;
         protected svm_model model;
-        
+
 
         /// <summary>
         /// Default SVM
         /// </summary>
         /// <remarks>The class store svm parameters and create the model. 
         /// This way, you can use it to predict</remarks>
-        public SVM(svm_problem prob, int svm_type, int kernel_type, int degree, 
+        public SVM(svm_problem prob, int svm_type, int kernel_type, int degree,
             double C, double gamma, double coef0, double nu, double cache_size,
-            double eps, double p, int shrinking, int probability, int nr_weight, 
+            double eps, double p, int shrinking, int probability, int nr_weight,
             int[] weight_label, double[] weight)
-            :this(prob, new svm_parameter()
+            : this(prob, new svm_parameter()
             {
                 svm_type = svm_type,
                 kernel_type = kernel_type,
@@ -47,14 +50,14 @@ namespace libsvm
         /// <remarks>The class store svm parameters and create the model.
         /// This way, you can use it to predict</remarks>
         public SVM(svm_problem prob, int svm_type,
-            Kernel kernel, double C, 
+            Kernel kernel, double C,
             double nu, double cache_size,
             double eps, double p, int shrinking, int probability, int nr_weight,
             int[] weight_label, double[] weight)
             : this(prob, new svm_parameter()
             {
                 svm_type = svm_type,
-                kernel_type = (int)kernel.KernelType,
+                kernel_type = (int) kernel.KernelType,
                 degree = kernel.Degree,
                 C = C,
                 gamma = kernel.Gamma,
@@ -85,8 +88,6 @@ namespace libsvm
 
             this.prob = prob;
             this.param = param;
-
-            this.Train();
         }
         /// <summary>
         /// Default SVM
@@ -97,8 +98,8 @@ namespace libsvm
             : this(ProblemHelper.ReadProblem(input_file_name), param)
         {
         }
-        
-        
+
+
         /// <summary>
         /// Train the SVM and save the model
         /// </summary>
@@ -106,7 +107,46 @@ namespace libsvm
         {
             this.model = svm.svm_train(prob, param);
         }
-        
+
+        /// <summary>
+        /// Export the model in an xml file
+        /// </summary>
+        public void Export(string model_file_name)
+        {
+            if (this.model == null)
+                throw new Exception("No trained svm model");
+
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(svm_model));
+                TextWriter writer = new StreamWriter(model_file_name);
+                serializer.Serialize(writer, this.model);
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occured when exporting svm model: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Import the model from an xml file
+        /// </summary>
+        public void Import(string model_file_name)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(svm_model));
+                FileStream fs = new FileStream(model_file_name, FileMode.Open);
+                this.model = (svm_model) serializer.Deserialize(fs);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occured when importing svm model: " + ex.Message);
+            }
+        }
+
         /// <summary>
         /// Provides the prediction
         /// </summary>
