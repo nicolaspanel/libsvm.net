@@ -1,4 +1,4 @@
-# libsvm.net
+# libsvm.net (2.0.4)
  
 libsvm.net is an easy way to use [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) in your .NET projects.
 
@@ -11,14 +11,14 @@ PM> Install-Package libsvm.net
 
 Note : For now, C-SVC and epsilon-SVR are supported. nu-SVC and nu-SVR will be available in future versions.
 
-You can use it this way:
+### Classification (using C_SVC)
+The code below describe the main methods :
 ```c#
 var prob = ProblemHelper.ReadAndScaleProblem(TRAINING_FILE);
 var test = ProblemHelper.ReadAndScaleProblem(TEST_FILE);
 
-
 var svm = new C_SVC(prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);
-var accuracy = svm.GetCrossValidationAccuracy(nr_fold);
+var accuracy = svm.GetCrossValidationAccuracy(nr_fold);// with nr_fold > 1
 for (int i = 0 ; i < test.l ; i++)
 {
     var x = test.x[i];
@@ -28,7 +28,33 @@ for (int i = 0 ; i < test.l ; i++)
     // Note : in about accuracy% of cases, 'predictedY' should be equal to 'y'
 }
 ```
-For more informations, take look to the [integration tests](https://github.com/nicolaspanel/libsvm.net/tree/master/LIBSVM.NET.Tests/LIBSVM.NET.Tests)
+Of course you can choose other kernels if you want (see `KernelHelper` for more informations).
+
+### Regression (using Epsilon_SVR)
+Methods are a little different but the spirit remains the same :
+```c#
+var prob = ProblemHelper.ReadAndScaleProblem(TRAINING_FILE);
+var svm = new Epsilon_SVR(prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
+double mse = svm.GetMeanSquaredError(); 
+//...
+var prediction = svm.Predict(x);
+```
+
+### Advance options
+Since version 2.0.4 (thanks to [ccerhan](https://github.com/ccerhan)), you can also save your models into xml files. This avoids having to train your model again and again when the dataset has not changed.
+
+For more informations, take look to the [examples](https://github.com/nicolaspanel/libsvm.net/tree/master/LIBSVM.NET.Examples/LIBSVM.NET.Examples).
+
+## License
+libsvm.net is provided under MIT License
+
+## Contributions
+Feel free to fork and improve/enhance libsvm.net in any way your want.
+
+If you feel that the community will benefit from your changes, please send a pull request!
+
+## Contributors
+ * [Can Erhan](https://github.com/ccerhan)
 
 ## How it works
 libsvm.net uses the official [libsvm Java library](http://www.csie.ntu.edu.tw/~cjlin/libsvm/#java), version 3.16 translated to .NET using [IKVM](http://www.ikvm.net/). It also provides helpers and classes to facilitate its use in real projects.
@@ -38,7 +64,5 @@ For more informations, see also :
  * [IKVM](http://www.ikvm.net/)
  * [Wikipedia article about SVM](https://en.wikipedia.org/wiki/Support_vector_machine)
 
-## License
-libsvm.net is provided under MIT License
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/abd9bce9df6164dedaa164cbf971ed21 "githalytics.com")](http://githalytics.com/nicolaspanel/libsvm.net)

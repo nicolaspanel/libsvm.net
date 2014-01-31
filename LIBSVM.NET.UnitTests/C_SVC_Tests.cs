@@ -38,7 +38,7 @@ namespace LIBSVM.NET.UnitTests
             // note : K(u; v) = (u  v + 1)^2 kernel is able to feet exactly the xor function 
             // see http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture18.pdf for more infos
             var svm = new C_SVC(xor_problem, KernelHelper.PolynomialKernel(2, 1, 1), 1);
-            var file_name = System.IO.Path.Combine(base_path, "test_export_temp.txt");
+            var file_name = System.IO.Path.Combine(base_path, "test_export_temp.xml");
             
             // make sure directory is clean
             if (File.Exists(file_name))
