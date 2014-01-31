@@ -59,10 +59,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Epsilon_SVRTests.cs" />
-    <Compile Include="ProblemHelperTests.cs" />
+    <Compile Include="Epsilon_SVR_Examples.cs" />
+    <Compile Include="ProblemHelper_Examples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="C_SVCTests.cs" />
+    <Compile Include="C_SVC_Examples.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LIBSVM\LIBSVM.NET.csproj">
