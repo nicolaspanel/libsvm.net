@@ -11,7 +11,7 @@ namespace LIBSVM.NET.Examples
     public class C_SVC_Examples
     {
         // Full leukemia dataset
-        private const string LEU_TEST_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.combined.txt";
+        private const string LEU_TEST_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.txt";
         
         // Full svmguide1 dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\svmguide1 folder
         //private const string SVMGUIDE1_TEST_FILE = "svmguide1.ds.combined.txt";

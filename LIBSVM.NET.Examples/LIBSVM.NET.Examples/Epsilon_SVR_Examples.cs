@@ -10,11 +10,9 @@ namespace LIBSVM.NET.Examples
         double epsilon = 1.0;
         private const string TRAINING_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.txt"; //File containing training samples
         private const string TEST_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.t.txt"; //File containing test samples
-        private const string FULL_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.combined.txt"; //File containing training and test samples
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/regression.html
         svm_problem training_prob;
         svm_problem test_prob;
-        svm_problem full_prob;
         static double C = 38;
         static double gamma = 2.0;
 
@@ -26,7 +24,6 @@ namespace LIBSVM.NET.Examples
             var basePath = path.Substring(0, pos + 10);
             training_prob = ProblemHelper.ReadAndScaleProblem(System.IO.Path.Combine(basePath, TRAINING_FILE));
             test_prob = ProblemHelper.ReadAndScaleProblem(System.IO.Path.Combine(basePath,TEST_FILE));
-            full_prob = ProblemHelper.ReadAndScaleProblem(System.IO.Path.Combine(basePath,FULL_FILE));
         }
 
         /// <summary>
@@ -36,9 +33,8 @@ namespace LIBSVM.NET.Examples
         [TestMethod()]
         public void GetCrossValidationSqsuaredCorrelationCoefficientTest()
         {
-            var svm = new Epsilon_SVR(full_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
+            var svm = new Epsilon_SVR(training_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
             double CVS = svm.GetCrossValidationSqsuaredCorrelationCoefficient();
-
         }
 
         /// <summary>
@@ -47,7 +43,7 @@ namespace LIBSVM.NET.Examples
         [TestMethod()]
         public void GetMeanSquaredErrorTest()
         {
-            var svm = new Epsilon_SVR(full_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
+            var svm = new Epsilon_SVR(training_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
             double cms = svm.GetMeanSquaredError();
             Assert.IsTrue(cms > 0);
         }

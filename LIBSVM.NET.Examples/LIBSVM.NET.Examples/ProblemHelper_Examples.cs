@@ -1,6 +1,7 @@
 ﻿using libsvm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 using System.Linq;
 
 namespace LIBSVM.NET.Examples
@@ -14,8 +15,8 @@ namespace LIBSVM.NET.Examples
     [TestClass()]
     public class ProblemHelper_Examples
     {
-        private const string TEST_FILE  = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.combined.txt";
-        private const string WRITE_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.writed.txt";
+        private const string TEST_FILE  = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.txt";
+        private const string WRITE_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds-copy.txt";
         private string base_path = "";
         
         [TestInitialize()]
@@ -69,11 +70,19 @@ namespace LIBSVM.NET.Examples
         [TestMethod()]
         public void WriteProblemTest()
         {
+            
             string full_test_path = System.IO.Path.Combine(base_path, TEST_FILE);
             var prob = ProblemHelper.ReadProblem(full_test_path);
 
             string full_write_path = System.IO.Path.Combine(base_path, WRITE_FILE);
+            if (File.Exists(full_write_path))
+            {
+                File.Delete(full_write_path);
+            }
+
             ProblemHelper.WriteProblem(full_write_path, prob);
+            Assert.IsTrue(File.Exists(full_write_path));
+            File.Delete(full_write_path); // cleaunp after test succeeded
         }
 
         /// <summary>
