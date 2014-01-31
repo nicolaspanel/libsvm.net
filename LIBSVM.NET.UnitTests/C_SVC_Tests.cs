@@ -29,11 +29,10 @@ namespace LIBSVM.NET.UnitTests
             var svm = new C_SVC(xor_problem, KernelHelper.PolynomialKernel(2, 1 , 1), 1);
 
             checkXOR(svm);
-            
         }
 
         [TestMethod]
-        public void C_SVC_Should_enable_to_export_and_import_svm_models()
+        public void C_SVC_should_enable_to_export_and_import_svm_models()
         {
             // note : K(u; v) = (u  v + 1)^2 kernel is able to feet exactly the xor function 
             // see http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture18.pdf for more infos

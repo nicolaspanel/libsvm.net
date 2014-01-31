@@ -15,11 +15,11 @@ namespace LIBSVM.NET.Examples
     [TestClass()]
     public class ProblemHelper_Examples
     {
-        private const string TEST_FILE  = @"dataSets\leukemia\leu.ds";
-        private const string WRITE_FILE = @"dataSets\leukemia\leu.ds-copy";
+        private const string TEST_FILE  = @"datasets\leukemia\leu.ds";
+        private const string WRITE_FILE = @"datasets\leukemia\leu.ds-copy";
         private string base_path = "";
         
-        [TestInitialize()]
+        //[TestInitialize()]
         public void TestInitialize()
         {
             var current_path = Environment.CurrentDirectory;
@@ -30,7 +30,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Test pour ReadAndScaleProblem
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void ReadAndScaleProblemTest()
         {
             string full_path = System.IO.Path.Combine(base_path, TEST_FILE);
@@ -43,7 +43,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Test pour ReadProblem
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void ReadProblemTest()
         {
             string full_path = System.IO.Path.Combine(base_path, TEST_FILE);
@@ -54,7 +54,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Test pour ScaleProblem
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void ScaleProblemTest()
         {
             string full_path = System.IO.Path.Combine(base_path, TEST_FILE);
@@ -67,7 +67,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Test pour WriteProblem
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void WriteProblemTest()
         {
             
@@ -85,43 +85,6 @@ namespace LIBSVM.NET.Examples
             File.Delete(full_write_path); // cleaunp after test succeeded
         }
 
-        /// <summary>
-        ///Test pour atof
-        ///</summary>
-        [TestMethod()]
-        public void atofTest()
-        {
-            string s = "1.0"; 
-            double expected = 1.0; 
-            double actual;
-            actual = ProblemHelper.atof(s);
-            Assert.AreEqual(expected, actual);
-        }
 
-        /// <summary>
-        ///Test pour atof
-        ///</summary>
-        [TestMethod()]
-        public void atofTest2()
-        {
-            string s = "1";
-            double expected = 1.0;
-            double actual;
-            actual = ProblemHelper.atof(s);
-            Assert.AreEqual(expected, actual);
-        }
-
-        /// <summary>
-        ///Test pour atoi
-        ///</summary>
-        [TestMethod()]
-        public void atoiTest()
-        {
-            string s = "2"; // TODO: initialisez à une valeur appropriée
-            int expected = 2; // TODO: initialisez à une valeur appropriée
-            int actual;
-            actual = ProblemHelper.atoi(s);
-            Assert.AreEqual(expected, actual);
-        }
     }
 }

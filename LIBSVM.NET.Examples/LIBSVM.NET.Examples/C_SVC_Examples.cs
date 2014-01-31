@@ -40,7 +40,7 @@ namespace LIBSVM.NET.Examples
         /// Show how to get the accuracy using cross validation method
         /// Assert accurancy is greater than zero
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void DoCrossValidationTest()
         {
             var svm = new C_SVC(_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);
@@ -53,7 +53,7 @@ namespace LIBSVM.NET.Examples
         ///Show how to predict probabilities for classification problems
         ///Verify that the prediction is always the most probable class
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void PredictTest()
         {
             var svm = new C_SVC(_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C);

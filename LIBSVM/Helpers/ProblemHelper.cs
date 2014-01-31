@@ -23,17 +23,17 @@ namespace libsvm
 
                     var st = line.Split(" \t\n\r\f".ToCharArray()).Where(c=>c!=String.Empty).ToArray();
 
-                    vy.Add(atof(st[0]));
+                    vy.Add(st[0].ToDouble());
 
                     int m = (st.Count()-1);
                     List<svm_node> x = new List<svm_node>();
                     for (int i = 0; i < m; i++)
                     {
                         var values = st[i + 1].Trim().Split(':');
-                        var value = atof(values[1]);
+                        var value = values[1].ToDouble();
                         x.Add( new svm_node()
                         {
-                            index = atoi(values[0]),
+                            index = values[0].ToInteger(),
                             value = value,
                         });
                         
@@ -100,10 +100,18 @@ namespace libsvm
             return scaledProb;
         }
 
+        public static svm_problem Scale(this svm_problem prob, double lower = -1.0, double upper = 1.0)
+        {
+            return ScaleProblem(prob, lower, upper);
+        }
+
+
         public static svm_problem ReadAndScaleProblem(string input_file_name, double lower = -1.0, double upper = 1.0)
         {
             return ScaleProblem(ReadProblem(input_file_name), lower, upper);
         }
+
+
 
         public static void WriteProblem(string output_file_name, svm_problem problem)
         {
@@ -124,19 +132,5 @@ namespace libsvm
             }
         }
         
-        public static double atof(String s)
-        {
-            double d = Double.Parse(s, usCulture);            
-            if ( Double.IsNaN(d) || Double.IsInfinity(d))
-            {
-                throw new FormatException(String.Format("'{0}' is not a valid Double value", s));
-            }
-            return (d);
-        }
-        public static int atoi(String s)
-        {
-            return Int32.Parse(s, usCulture);
-        }
-        private static CultureInfo usCulture = new CultureInfo("en-US");
     }
 }

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CommonHelpers.cs" />
     <Compile Include="SVC\C_SVC.cs" />
     <Compile Include="Helpers\KernelHelper.cs" />
     <Compile Include="Kernel.cs" />

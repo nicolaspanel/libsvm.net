@@ -30,7 +30,7 @@ namespace LIBSVM.NET.Examples
         ///Show how to get the sqsuared correlation coefficient using cross validation method
         ///Note : cros validation use the full dataset to increase the accuracy
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void GetCrossValidationSqsuaredCorrelationCoefficientTest()
         {
             var svm = new Epsilon_SVR(training_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
@@ -40,7 +40,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Show how to get the Mean Squared Error
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void GetMeanSquaredErrorTest()
         {
             var svm = new Epsilon_SVR(training_prob, KernelHelper.RadialBasisFunctionKernel(gamma), C, epsilon);
@@ -51,7 +51,7 @@ namespace LIBSVM.NET.Examples
         /// <summary>
         ///Show how predict values for regression problems
         ///</summary>
-        [TestMethod()]
+        //[TestMethod()]
         public void PredictTest()
         {
             //Train the svm with the training datatset
