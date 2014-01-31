@@ -5,13 +5,14 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using libsvm;
 
-namespace LIBSVM.NET.Tests
+namespace LIBSVM.NET.Examples
 {
     [TestClass()]
-    public class C_SVCTests
+    public class C_SVC_Tests
     {
-        // Full leukemia dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\leukemia folder
-        private const string LEU_TEST_FILE = @"LIBSVM.NET.Tests\DataSets\leukemia\leu.ds.combined.txt";
+        // Full leukemia dataset
+        private const string LEU_TEST_FILE = @"LIBSVM.NET.Examples\DataSets\leukemia\leu.ds.combined.txt";
+        
         // Full svmguide1 dataset, see .\libsvm.net\LIBSVM.NET.Tests\DataSets\svmguide1 folder
         //private const string SVMGUIDE1_TEST_FILE = "svmguide1.ds.combined.txt";
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/multiclass.html

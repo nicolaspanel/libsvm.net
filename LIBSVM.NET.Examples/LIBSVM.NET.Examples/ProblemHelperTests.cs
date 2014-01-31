@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 
-namespace LIBSVM.NET.Tests
+namespace LIBSVM.NET.Examples
 {
     
     
@@ -12,7 +12,7 @@ namespace LIBSVM.NET.Tests
     ///les tests unitaires ProblemHelperTests
     ///</summary>
     [TestClass()]
-    public class ProblemHelperTests
+    public class ProblemHelper_Tests
     {
 
         private const string TEST_FILE = "C:\\Users\\user\\Documents\\visual studio 2010\\Projects\\LIBSVM\\LIBSVM.NET.Tests\\DataSets\\leukemia\\leu.ds.combined";

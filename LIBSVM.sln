@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBSVM.NET", "LIBSVM\LIBSVM.NET.csproj", "{1B43848F-6E53-4F9C-A184-76806886B06D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBSVM.NET.Tests", "LIBSVM.NET.Tests\LIBSVM.NET.Tests\LIBSVM.NET.Tests.csproj", "{D283B879-F041-49BD-AB48-67A269ACACFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBSVM.NET.Examples", "LIBSVM.NET.Examples\LIBSVM.NET.Examples\LIBSVM.NET.Examples.csproj", "{D283B879-F041-49BD-AB48-67A269ACACFB}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

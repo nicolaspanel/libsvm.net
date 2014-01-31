@@ -9,7 +9,7 @@
     <ProjectGuid>{D283B879-F041-49BD-AB48-67A269ACACFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LIBSVM.NET.Tests</RootNamespace>
+    <RootNamespace>LIBSVM.NET.Examples</RootNamespace>
     <AssemblyName>LIBSVM.NET.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

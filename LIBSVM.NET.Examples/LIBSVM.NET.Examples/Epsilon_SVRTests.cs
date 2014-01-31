@@ -2,15 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace LIBSVM.NET.Tests
+namespace LIBSVM.NET.Examples
 {
     [TestClass()]
-    public class Epsilon_SVRTests
+    public class Epsilon_SVR_Tests
     {
         double epsilon = 1.0;
-        private const string TRAINING_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.txt"; //File containing training samples
-        private const string TEST_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.t.txt"; //File containing test samples
-        private const string FULL_FILE = @"LIBSVM.NET.Tests\DataSets\mpg\mpg.ds.combined.txt"; //File containing training and test samples
+        private const string TRAINING_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.txt"; //File containing training samples
+        private const string TEST_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.t.txt"; //File containing test samples
+        private const string FULL_FILE = @"LIBSVM.NET.Examples\DataSets\mpg\mpg.ds.combined.txt"; //File containing training and test samples
         // Find more datasets in the libsvm official website : http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/regression.html
         svm_problem training_prob;
         svm_problem test_prob;
