@@ -11,7 +11,11 @@ namespace libsvm
         public SVC(SvmType svm_type, svm_problem prob, Kernel kernel, double C, double cache_size = 100)
             : base(prob, (int) svm_type, kernel, C, 0.0, cache_size, 1e-3, 0.1, 1, 1, 0, new int[0], new double[0])
         {
+        }
 
+        public SVC(string model_file_name)
+            : base(model_file_name)
+        {
         }
 
         public override double Predict(svm_node[] x)

@@ -88,7 +88,20 @@ namespace libsvm
 
             this.prob = prob;
             this.param = param;
+
+            this.Train();
         }
+
+        /// <summary>
+        /// Default SVM
+        /// </summary>
+        /// <remarks>The class imports the model directly.
+        /// This way, you can use it to predict</remarks>
+        public SVM(string model_file_name)
+        {
+            this.Import(model_file_name);
+        }
+
         /// <summary>
         /// Default SVM
         /// </summary>
@@ -98,7 +111,6 @@ namespace libsvm
             : this(ProblemHelper.ReadProblem(input_file_name), param)
         {
         }
-
 
         /// <summary>
         /// Train the SVM and save the model

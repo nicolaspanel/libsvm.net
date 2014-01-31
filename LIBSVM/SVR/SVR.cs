@@ -15,6 +15,11 @@ namespace libsvm
 
         }
 
+        public SVR(string model_file_name)
+            : base(model_file_name)
+        {
+        }
+
         public double GetMeanSquaredError(int nr_fold = 5)
         {
             double[] target = new double[prob.l];

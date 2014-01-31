@@ -5,7 +5,7 @@ using System.Text;
 
 namespace libsvm
 {
-    public class Epsilon_SVR: SVR
+    public class Epsilon_SVR : SVR
     {
         /// <summary>
         /// Create and train the Epsilon_SV
@@ -27,7 +27,15 @@ namespace libsvm
         /// <param name="probability">Specify if probability are needed</param>
         /// <param name="cache_size">Indicates the maximum memory that can use the program</param>
         public Epsilon_SVR(string input_file_name, Kernel kernel, double C, double epsilon, bool probability = true, double cache_size = 100)
-            : this(ProblemHelper.ReadAndScaleProblem(input_file_name), kernel, C, epsilon, probability, cache_size) 
+            : this(ProblemHelper.ReadAndScaleProblem(input_file_name), kernel, C, epsilon, probability, cache_size)
+        {
+        }
+        /// <summary>
+        /// Craete and import Epsilon_SVR model
+        /// </summary>
+        /// <param name="model_file_name">Path to the SVM model file.</param>
+        public Epsilon_SVR(string model_file_name)
+            : base(model_file_name)
         {
         }
     }
