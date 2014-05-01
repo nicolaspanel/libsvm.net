@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>libsvm.net</id>
-        <version>2.1.4</version>
+        <version>2.1.5</version>
         <authors>nicolas.panel@live.fr</authors>
         <owners>Nicolas Panel</owners>
         <licenseUrl>https://github.com/nicolaspanel/libsvm.net#license</licenseUrl>
         <projectUrl>https://github.com/nicolaspanel/libsvm.net</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An easy and quick way to use libsvm in your .NET projects. Envoy !</description>
-        <releaseNotes />
+        <releaseNotes>Support for reading and scaling problem that comes from dataset in memory which is in the form of a List</releaseNotes>
         <copyright>Copyright (C) 2013-2014 Nicolas Panel</copyright>
-        <tags>svm libsvm Machinelearning .net ikvm</tags>
+        <tags>svm libsvm machinelearning .net ikvm</tags>
     </metadata>
     <files>
         <file src="lib\IKVM.OpenJDK.Core.dll" target="lib\IKVM.OpenJDK.Core.dll" />
