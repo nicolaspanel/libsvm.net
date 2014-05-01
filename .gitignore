@@ -43,3 +43,8 @@
 TestResults/
 *.trx
 *.testsettings
+
+#################
+## NuGet
+#################
+*.nupkg
