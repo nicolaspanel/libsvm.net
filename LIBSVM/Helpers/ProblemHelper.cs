@@ -45,13 +45,28 @@ namespace libsvm
 
         public static svm_problem ReadProblem(List<List<double>> dataset)
         {
+            if (dataset == null)
+            {
+                throw new ArgumentNullException("dataset", "dataset passed in could not be null.");
+            }
+
+            if (dataset.Count == 0)
+            {
+                throw new Exception("dataset should contain at least one field");
+            }
+
             var vy = new List<double>();
             var vx = new List<svm_node[]>();
+            int featureCount = dataset.First().Count - 1;
 
             for (int i = 0; i < dataset.Count(); i++)
             {
                 vy.Add(dataset[i][0]);
 
+                if (!((dataset[i].Count - 1).Equals(featureCount)))
+                {
+                    throw new Exception(string.Format("The features extracted from the {0} row of dataset does not equal to {1}. Missing one or more feature columns?", i, featureCount));
+                }
                 var x = new List<svm_node>();
                 for (int j = 1; j < dataset[i].Count; j++)
                 {
@@ -92,7 +107,7 @@ namespace libsvm
             }
 
             var scaledProb = new svm_problem {l = n, y = prob.y.ToArray(), x = new svm_node[n][]};
-            
+
             for (int i = 0; i < n; i++)
             {
                 int m = prob.x[i].Count();
