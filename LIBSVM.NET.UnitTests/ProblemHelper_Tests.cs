@@ -132,7 +132,7 @@ namespace LIBSVM.NET.UnitTests
                 {
                     new List<double> {18, 8, 307.0, 130.0, 3504.0, 12.0, 70, 1},
                     new List<double> {15, 8, 350.0, 165.0, 3693.0, 11.5, 70, 1},
-                    new List<double> {18, 8, 318.0, 150.0, 11.0, 70, 1}, // miss the 5th feature column.
+                    new List<double> {18, 8, 318.0, 150.0, 11.0, 70, 1}, // miss the 4th feature column.
                     new List<double> {16, 8, 304.0, 150.0, 3433.0, 12.0, 70, 1},
                     new List<double> {17, 8, 302.0, 140.0, 3449.0, 10.5, 70, 1}
                 };
