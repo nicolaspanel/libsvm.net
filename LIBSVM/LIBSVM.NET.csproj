@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CommonHelpers.cs" />
+    <Compile Include="Exceptions\InvalidFeatureException.cs" />
     <Compile Include="SVC\C_SVC.cs" />
     <Compile Include="Helpers\KernelHelper.cs" />
     <Compile Include="Kernel.cs" />

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>IKVM.Runtime</id>
+    <version>7.2.4630.5</version>
+    <authors>qCat</authors>
+    <owners>qCat</owners>
+    <licenseUrl>http://tempuri.org/</licenseUrl>
+    <projectUrl>http://tempuri.org/</projectUrl>
+    <iconUrl>http://tempuri.org/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>IKVM.Runtime, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58</description>
+  </metadata>
+</package>
