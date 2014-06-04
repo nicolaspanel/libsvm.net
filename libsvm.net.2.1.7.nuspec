@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>libsvm.net</id>
+        <version>2.1.7</version>
+        <authors>nicolas.panel@live.fr</authors>
+        <owners>Nicolas Panel</owners>
+        <licenseUrl>https://github.com/nicolaspanel/libsvm.net#license</licenseUrl>
+        <projectUrl>https://github.com/nicolaspanel/libsvm.net</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An easy and quick way to use libsvm in your .NET projects. Envoy !</description>
+        <releaseNotes></releaseNotes>
+        <copyright>Copyright (C) 2013-2014 Nicolas Panel</copyright>
+        <tags>svm libsvm machinelearning .net ikvm</tags>
+		<dependencies>
+			<group>
+				<dependency id="IKVM.Runtime" version="7.2.4630.5" />
+				<dependency id="IKVM.OpenJDK.Util" version="7.2.4630.5" />
+				<dependency id="IKVM.OpenJDK.Core" version="7.2.4630.5" />
+			</group>
+		</dependencies>
+    </metadata>
+	<files>
+        <file src="lib\libsvm.dll" target="lib\libsvm.dll" />
+        <file src="lib\LIBSVM.NET.dll" target="lib\LIBSVM.NET.dll" />
+    </files>
+</package>
