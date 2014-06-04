@@ -36,16 +36,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IKVM.OpenJDK.Core">
-      <HintPath>..\Nuget\Lib\IKVM.OpenJDK.Core.dll</HintPath>
+      <HintPath>..\lib\IKVM.OpenJDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="IKVM.OpenJDK.Util">
-      <HintPath>..\Nuget\Lib\IKVM.OpenJDK.Util.dll</HintPath>
+      <HintPath>..\lib\IKVM.OpenJDK.Util.dll</HintPath>
     </Reference>
     <Reference Include="IKVM.Runtime">
-      <HintPath>..\Nuget\Lib\IKVM.Runtime.dll</HintPath>
+      <HintPath>..\lib\IKVM.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="libsvm">
-      <HintPath>..\Nuget\Lib\libsvm.dll</HintPath>
+      <HintPath>..\lib\libsvm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

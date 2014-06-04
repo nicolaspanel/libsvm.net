@@ -8,40 +8,37 @@ namespace libsvm
 {
     public static class ProblemHelper
     {
-        public static svm_problem ReadProblem(string input_file_name)
+        public static svm_problem ReadProblem(string inputFileName)
         {
-            var vy = new List<double>();
-            var vx = new List<svm_node[]>();
-            using (var sr = new StreamReader(input_file_name))
+            var y = new List<double>();
+            var x = new List<svm_node[]>(); 
+            var lines = File.ReadAllLines(inputFileName);
+
+            foreach (var tokens in lines.Select(line => line.Split(" \t\n\r\f".ToCharArray())
+                                                            .Where(c => c != String.Empty).ToArray()))
             {
-                while (true)
-                {
-                    string line = sr.ReadLine();
-                    if (line == null) break;
-
-                    string[] st = line.Split(" \t\n\r\f".ToCharArray()).Where(c => c != String.Empty).ToArray();
-
-                    vy.Add(st[0].ToDouble());
-
-                    int m = (st.Count() - 1);
-                    var x = new List<svm_node>();
-                    for (int i = 0; i < m; i++)
-                    {
-                        string[] values = st[i + 1].Trim().Split(':');
-                        double value = values[1].ToDouble();
-                        x.Add(new svm_node
-                        {
-                            index = values[0].ToInteger(),
-                            value = value,
-                        });
-                    }
-                    vx.Add(x.ToArray());
-                }
+                y.Add(tokens[0].ToDouble()); 
+                x.Add(GetNodes(tokens).ToArray());
             }
-            var prob = new svm_problem {l = vy.Count, x = vx.ToArray(), y = vy.ToArray()};
 
-            return prob;
+            return new svm_problem { l = y.Count, x = x.ToArray(), y = y.ToArray() }; 
         }
+
+        private static IEnumerable<svm_node> GetNodes(IList<string> tokens)
+        {
+            for (var i = 1; i <= (tokens.Count() - 1); i++)
+            {
+                var token = tokens[i].Trim().Split(':');
+
+                yield return new svm_node
+                {
+                    index = token[0].ToInteger(),
+                    value = token[1].ToDouble(),
+                };
+            }
+        }
+
+        
 
         public static svm_problem ReadProblem(List<List<double>> dataset)
         {
@@ -52,7 +49,7 @@ namespace libsvm
 
             if (dataset.Count == 0)
             {
-                throw new Exception("dataset should contain at least one field");
+                throw new ArgumentException("dataset should contain at least one field"); 
             }
 
             var vy = new List<double>();
@@ -65,7 +62,7 @@ namespace libsvm
 
                 if (!((dataset[i].Count - 1).Equals(featureCount)))
                 {
-                    throw new Exception(string.Format("The features extracted from the {0} row of dataset does not equal to {1}. Missing one or more feature columns?", i, featureCount));
+                    throw new InvalidFeatureException(string.Format("The features extracted from the {0} row of dataset does not equal to {1}. Missing one or more feature columns?", i, featureCount));
                 }
                 var x = new List<svm_node>();
                 for (int j = 1; j < dataset[i].Count; j++)
@@ -84,15 +81,15 @@ namespace libsvm
 
         public static svm_problem ScaleProblem(svm_problem prob, double lower = -1.0, double upper = 1.0)
         {
-            int index_max = prob.x.Max(X => X.Max(e => e.index));
-            var feature_max = new double[(index_max + 1)];
-            var feature_min = new double[(index_max + 1)];
+            int indexMax = prob.x.Max(X => X.Max(e => e.index));
+            var featureMax = new double[(indexMax + 1)];
+            var featureMin = new double[(indexMax + 1)];
             int n = prob.l;
 
-            for (int i = 0; i <= index_max; i++)
+            for (int i = 0; i <= indexMax; i++)
             {
-                feature_max[i] = -Double.MaxValue;
-                feature_min[i] = Double.MaxValue;
+                featureMax[i] = -Double.MaxValue;
+                featureMin[i] = Double.MaxValue;
             }
 
             for (int i = 0; i < n; i++)
@@ -101,8 +98,8 @@ namespace libsvm
                 for (int j = 0; j < m; j++)
                 {
                     int index = prob.x[i][j].index;
-                    feature_max[index - 1] = Math.Max(feature_max[index - 1], prob.x[i][j].value);
-                    feature_min[index - 1] = Math.Min(feature_min[index - 1], prob.x[i][j].value);
+                    featureMax[index - 1] = Math.Max(featureMax[index - 1], prob.x[i][j].value);
+                    featureMin[index - 1] = Math.Min(featureMin[index - 1], prob.x[i][j].value);
                 }
             }
 
@@ -116,12 +113,12 @@ namespace libsvm
                 {
                     int index = prob.x[i][j].index;
                     double value = prob.x[i][j].value;
-                    double max = feature_max[index - 1];
-                    double min = feature_min[index - 1];
+                    double max = featureMax[index - 1];
+                    double min = featureMin[index - 1];
 
                     scaledProb.x[i][j] = new svm_node {index = index};
 
-                    if (min == max)
+                    if (Math.Abs(min - max) < double.Epsilon)
                         scaledProb.x[i][j].value = 0;
                     else
                         scaledProb.x[i][j].value = lower + (upper - lower)*(value - min)/(max - min);
@@ -135,9 +132,9 @@ namespace libsvm
             return ScaleProblem(prob, lower, upper);
         }
 
-        public static svm_problem ReadAndScaleProblem(string input_file_name, double lower = -1.0, double upper = 1.0)
+        public static svm_problem ReadAndScaleProblem(string inputFileName, double lower = -1.0, double upper = 1.0)
         {
-            return ScaleProblem(ReadProblem(input_file_name), lower, upper);
+            return ScaleProblem(ReadProblem(inputFileName), lower, upper);
         }
 
         public static svm_problem ReadAndScaleProblem(List<List<double>> dataset, double lower = -1.0, double upper = 1.0)
@@ -145,9 +142,9 @@ namespace libsvm
             return ScaleProblem(ReadProblem(dataset), lower, upper);
         }
 
-        public static void WriteProblem(string output_file_name, svm_problem prob)
+        public static void WriteProblem(string outputFileName, svm_problem prob)
         {
-            using (var sw = new StreamWriter(output_file_name))
+            using (var sw = new StreamWriter(outputFileName))
             {
                 for (int i = 0; i < prob.l; i++)
                 {

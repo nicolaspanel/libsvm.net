@@ -25,7 +25,7 @@ namespace libsvm
         /// <returns>Polynomial Kernel with parameters</returns>
         public static Kernel PolynomialKernel(int degree, double gamma, double r)
         {
-            if (gamma == 0)
+            if (Math.Abs(gamma) < double.Epsilon)
                 throw new ArgumentOutOfRangeException("gamma");
             if (degree < 2)
                 throw new ArgumentOutOfRangeException("degree");
@@ -40,7 +40,7 @@ namespace libsvm
         /// <returns>RBF kernel with parameters</returns>
         public static Kernel RadialBasisFunctionKernel(double gamma)
         {
-            if (gamma == 0)
+            if (Math.Abs(gamma) < double.Epsilon)
                 throw new ArgumentOutOfRangeException("gamma");
 
             return new Kernel(KernelType.RBF, gamma, 0, 0);
@@ -55,7 +55,7 @@ namespace libsvm
         /// <returns>Sigmoid Kernel with parameters</returns>
         public static Kernel SigmoidKernel(double gamma, double r)
         {
-            if (gamma == 0)
+            if (Math.Abs(gamma) < double.Epsilon)
                 throw new ArgumentOutOfRangeException("gamma");
 
             return new Kernel(KernelType.SIGMOID, gamma, r, 0);
