@@ -3,7 +3,7 @@
 
 libsvm.net is an easy way to use [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) in your .NET projects.
 
-Current version : 2.1.5
+Current version : 2.1.7
 
 ##How to use it
 First of all, if you are not familiar with SVM, I highly recommend to read this [guide](http://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf).
