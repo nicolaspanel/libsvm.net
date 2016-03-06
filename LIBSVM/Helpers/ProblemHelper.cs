@@ -11,17 +11,17 @@ namespace libsvm
         public static svm_problem ReadProblem(string inputFileName)
         {
             var y = new List<double>();
-            var x = new List<svm_node[]>(); 
+            var x = new List<svm_node[]>();
             var lines = File.ReadAllLines(inputFileName);
 
             foreach (var tokens in lines.Select(line => line.Split(" \t\n\r\f".ToCharArray())
                                                             .Where(c => c != String.Empty).ToArray()))
             {
-                y.Add(tokens[0].ToDouble()); 
+                y.Add(tokens[0].ToDouble());
                 x.Add(GetNodes(tokens).ToArray());
             }
 
-            return new svm_problem { l = y.Count, x = x.ToArray(), y = y.ToArray() }; 
+            return new svm_problem { l = y.Count, x = x.ToArray(), y = y.ToArray() };
         }
 
         private static IEnumerable<svm_node> GetNodes(IList<string> tokens)
@@ -38,8 +38,6 @@ namespace libsvm
             }
         }
 
-        
-
         public static svm_problem ReadProblem(List<List<double>> dataset)
         {
             if (dataset == null)
@@ -49,7 +47,7 @@ namespace libsvm
 
             if (dataset.Count == 0)
             {
-                throw new ArgumentException("dataset should contain at least one field"); 
+                throw new ArgumentException("dataset should contain at least one field");
             }
 
             var vy = new List<double>();
@@ -76,10 +74,10 @@ namespace libsvm
                 vx.Add(x.ToArray());
             }
 
-            return new svm_problem {l = dataset.Count(), x = vx.ToArray(), y = vy.ToArray()};
+            return new svm_problem { l = dataset.Count(), x = vx.ToArray(), y = vy.ToArray() };
         }
 
-        public static svm_problem ScaleProblem(svm_problem prob, double lower = -1.0, double upper = 1.0)
+        public static svm_problem ScaleProblem(svm_problem prob, double lower = -1.0, double upper = 1.0, string rangefile = "")
         {
             int indexMax = prob.x.Max(X => X.Max(e => e.index));
             var featureMax = new double[(indexMax + 1)];
@@ -103,7 +101,7 @@ namespace libsvm
                 }
             }
 
-            var scaledProb = new svm_problem {l = n, y = prob.y.ToArray(), x = new svm_node[n][]};
+            var scaledProb = new svm_problem { l = n, y = prob.y.ToArray(), x = new svm_node[n][] };
 
             for (int i = 0; i < n; i++)
             {
@@ -116,15 +114,100 @@ namespace libsvm
                     double max = featureMax[index - 1];
                     double min = featureMin[index - 1];
 
-                    scaledProb.x[i][j] = new svm_node {index = index};
+                    scaledProb.x[i][j] = new svm_node { index = index };
 
                     if (Math.Abs(min - max) < double.Epsilon)
                         scaledProb.x[i][j].value = 0;
                     else
-                        scaledProb.x[i][j].value = lower + (upper - lower)*(value - min)/(max - min);
+                        scaledProb.x[i][j].value = lower + (upper - lower) * (value - min) / (max - min);
                 }
             }
+
+            if (!string.IsNullOrEmpty(rangefile))
+            {
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(rangefile, false))
+                    {
+                        sw.WriteLine("x");
+                        sw.WriteLine(lower.ToString() + " " + upper.ToString());
+                        for (int i = 1; i < featureMin.Length; i++)
+                        {
+                            sw.WriteLine(i.ToString() + " " + featureMin[i-1].ToString() + " " + featureMax[i-1].ToString());
+                        }
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    throw new Exception("Error in saving RangeFile: " + Ex.ToString());
+                }
+            }
+
             return scaledProb;
+        }
+
+        public static svm_problem ScaleProblemWithRange(svm_problem prob, string rangefile)
+        {
+            double lower = -1, upper = 1;
+            if (!File.Exists(rangefile))
+            {
+                throw new Exception("rangefile do not exist!");
+            }
+            else
+            {
+                int indexMax = prob.x.Max(X => X.Max(e => e.index));
+                var featureMax = new double[(indexMax + 1)];
+                var featureMin = new double[(indexMax + 1)];
+                int n = prob.l;
+                //Load min/max of each features and upper/lower
+                using (StreamReader sr = new StreamReader(rangefile))
+                {
+                    if (sr.ReadLine() != "x")
+                    {
+                        throw new Exception("RangeFile is not well formatted!");
+                    }
+                    var limits = sr.ReadLine().Split(' ');
+                    lower = Convert.ToDouble(limits[0]);
+                    upper = Convert.ToDouble(limits[1]);
+
+                    Int32 Index = 1;
+                    while (!sr.EndOfStream)
+                    {
+                        string[] elements = sr.ReadLine().Split(' ');
+                        if ((Index) != (Convert.ToInt32(elements[0])))
+                        {
+                            throw new Exception("RangeFile is not well formatted!");
+                        }
+                        featureMax[Index-1] = Convert.ToDouble(elements[2]);
+                        featureMin[Index-1] = Convert.ToDouble(elements[1]);
+                        Index++;
+                    }
+                }
+
+                var scaledProb = new svm_problem { l = n, y = prob.y.ToArray(), x = new svm_node[n][] };
+
+                //Scale data with loaded parameters
+                for (int i = 0; i < n; i++)
+                {
+                    int m = prob.x[i].Count();
+                    scaledProb.x[i] = new svm_node[m];
+                    for (int j = 0; j < m; j++)
+                    {
+                        int index = prob.x[i][j].index;
+                        double value = prob.x[i][j].value;
+                        double max = featureMax[index - 1];
+                        double min = featureMin[index - 1];
+
+                        scaledProb.x[i][j] = new svm_node { index = index };
+
+                        if (Math.Abs(min - max) < double.Epsilon)
+                            scaledProb.x[i][j].value = 0;
+                        else
+                            scaledProb.x[i][j].value = lower + (upper - lower) * (value - min) / (max - min);
+                    }
+                }
+                return scaledProb;
+            }
         }
 
         public static svm_problem Scale(this svm_problem prob, double lower = -1.0, double upper = 1.0)
@@ -137,9 +220,19 @@ namespace libsvm
             return ScaleProblem(ReadProblem(inputFileName), lower, upper);
         }
 
+        public static svm_problem ReadAndScaleWithRangeProblem(string inputFileName, string rangeFilename)
+        {
+            return ScaleProblemWithRange(ReadProblem(inputFileName), rangeFilename);
+        }
+
         public static svm_problem ReadAndScaleProblem(List<List<double>> dataset, double lower = -1.0, double upper = 1.0)
         {
             return ScaleProblem(ReadProblem(dataset), lower, upper);
+        }
+
+        public static svm_problem ReadAndScaleWithRangeProblem(List<List<double>> dataset, string rangeFilename)
+        {
+            return ScaleProblemWithRange(ReadProblem(dataset), rangeFilename);
         }
 
         public static void WriteProblem(string outputFileName, svm_problem prob)
