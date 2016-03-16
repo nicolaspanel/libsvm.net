@@ -33,7 +33,7 @@ namespace libsvm
                 yield return new svm_node
                 {
                     index = token[0].ToInteger(),
-                    value = token[1].ToDouble(),
+                    value = token[1].Replace(',', '.').ToDouble(),
                 };
             }
         }
@@ -133,7 +133,7 @@ namespace libsvm
                         sw.WriteLine(lower.ToString() + " " + upper.ToString());
                         for (int i = 1; i < featureMin.Length; i++)
                         {
-                            sw.WriteLine(i.ToString() + " " + featureMin[i-1].ToString() + " " + featureMax[i-1].ToString());
+                            sw.WriteLine(i.ToString() + " " + featureMin[i-1] + " " + featureMax[i-1]);
                         }
                     }
                 }
