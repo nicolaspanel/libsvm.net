@@ -54,7 +54,23 @@ namespace LIBSVM.NET.UnitTests
 
             File.Delete(file_name); // cleanup
         }
+        
+        [TestMethod]
+        public void C_SVC_should_serialize_svm_models_to_XML_and_deserialize_them()
+        {
+            // note : K(u; v) = (u  v + 1)^2 kernel is able to feet exactly the xor function 
+            // see http://www.doc.ic.ac.uk/~dfg/ProbabilisticInference/IDAPILecture18.pdf for more infos
+            var svm = new C_SVC(xor_problem, KernelHelper.PolynomialKernel(2, 1, 1), 1);
+            
+            string xml = svm.ToXML();
 
+            var new_svm = new C_SVC();
+
+            new_svm.LoadXML(xml);
+
+            checkXOR(new_svm);
+        }
+        
         [TestMethod]
         public void C_SVC_should_always_return_the_same_cross_validation_accuracy_when_probability_is_false()
         {

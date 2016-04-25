@@ -39,5 +39,14 @@
             : base(model_file_name)
         {
         }
+        
+        /// <summary>
+        ///     Classification SVM. 
+        ///     Supports multi-class classification. 
+        ///     The class expects to import the SVM model with a method in the concrete class.
+        /// </summary>
+        public C_SVC()
+        {
+        }
     }
 }

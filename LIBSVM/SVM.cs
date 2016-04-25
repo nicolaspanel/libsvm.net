@@ -105,6 +105,15 @@ namespace libsvm
         /// <summary>
         /// Default SVM
         /// </summary>
+        /// <remarks>The class expects to import the model directly using the LoadXML method.
+        /// This way, you can use it to predict</remarks>
+        public SVM()
+        {
+        }
+
+        /// <summary>
+        /// Default SVM
+        /// </summary>
         /// <remarks>The class store svm parameters and create the model.
         /// This way, you can use it to predict</remarks>
         public SVM(string input_file_name, svm_parameter param)
@@ -159,6 +168,64 @@ namespace libsvm
             }
         }
 
+        /// <summary>
+        /// Serialize the model into an XML.
+        /// </summary>
+        /// <returns>The serialized model</returns>
+        /// <exception cref="Exception">
+        /// No trained svm model
+        /// or
+        /// An error occured when serializing svm model:  + ex.Message
+        /// </exception>
+        public string ToXML()
+        {
+            if (this.model == null)
+                throw new Exception("No trained svm model");
+
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(svm_model));
+
+                using (StringWriter sw = new StringWriter())
+                {
+                    using (XmlWriter writer = XmlWriter.Create(sw))
+                    {
+                        serializer.Serialize(writer, this.model);
+                        return sw.ToString(); 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occured when serializing svm model: " + ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Loads the model from an XML.
+        /// </summary>
+        /// <param name="xml">The XML string.</param>
+        /// <exception cref="Exception">An error occured when deserializing svm model:  + ex.Message</exception>
+        public void LoadXML(string xml)
+        {
+            try
+            {
+                var deserializer = new XmlSerializer(typeof(svm_model));
+
+                using (StringReader sr = new System.IO.StringReader(xml))
+                {
+                    using (XmlReader reader = XmlReader.Create(sr))
+                    {
+                        this.model = (svm_model)deserializer.Deserialize(reader);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occured when deserializing svm model: " + ex.Message);
+            }
+        }
+        
         /// <summary>
         /// Provides the prediction
         /// </summary>

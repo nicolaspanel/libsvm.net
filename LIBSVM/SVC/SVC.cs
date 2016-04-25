@@ -16,6 +16,10 @@ namespace libsvm
         {
         }
 
+        public SVC()
+        {
+        }
+        
         public override double Predict(svm_node[] x)
         {
             if (model == null)
