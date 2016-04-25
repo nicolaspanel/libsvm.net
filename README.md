@@ -1,3 +1,7 @@
+# New owner required
+Since I have not been developing in .NET for a while and I don't use Windows anymore, I cannot maintain this library any longer. Let me know if you want to take over.
+
+
 # libsvm.net 
 
 
